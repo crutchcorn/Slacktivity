@@ -2,9 +2,10 @@
   "name": "Maximum Slackivity",
   "version": "0.1.0",
   "icons": {
-    "16": "/icon/get_started16.png",
-    "48": "/icon/get_started48.png",
-    "128": "/icon/get_started128.png"
+    "16": "/icon/slacktivity_16.png",
+    "32": "/icon/slacktivity_32.png",
+    "48": "/icon/slacktivity_48.png",
+    "128": "/icon/slacktivity_128.png"
   },
   "description": "Making improvements and adding features to the web Slack experience.",
   "permissions": [

@@ -129,7 +129,7 @@
 
     conditionallyAddEffects();
   };
-  
+
   // Make sure elements are on screen
   function checkDocumentLoaded(cb) {
     if (document.querySelector(".client_channels_list_container")) {
