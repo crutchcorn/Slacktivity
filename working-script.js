@@ -1,7 +1,8 @@
 (() => {
+  // TODO: Should also trap focus
   const setupStuff = () => {
-    // TODO: Add escape key listener for leaving drawer
     const channelList = document.querySelector(".client_channels_list_container");
+    const channelHeader = document.querySelector('.channel_header');
     const channelListBody = document.getElementById("col_channels");
     const originalDisplayChannelListBody = channelListBody.style.display;
 
@@ -11,11 +12,11 @@
     drawerRadio.classList.add(`corbinPluginradioEl`);
     drawerRadio.id = `corbinPlugindrawer`;
     drawerRadio.name = `corbinPluginsidenav`;
-    drawerRadio.setAttribute('aria-hidden', "true");
+    drawerRadio.setAttribute("aria-hidden", "true");
     drawerRadio.value = "on";
 
     const showChannelList = () => {
-      channelList.setAttribute('aria-hidden', "true");
+      channelList.setAttribute("aria-hidden", "true");
       drawerRadio.click();
       channelListBody.style.display = originalDisplayChannelListBody;
     };
@@ -23,7 +24,7 @@
     const drawerButton = document.createElement("button");
     drawerButton.id = `corbinPlugindrawerButton`;
     drawerButton.type = `button`;
-    drawerButton.addEventListener('click', event => {
+    drawerButton.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
       showChannelList();
@@ -35,12 +36,12 @@
     scrimRadio.id = `corbinPluginscrim`;
     scrimRadio.name = `corbinPluginsidenav`;
     scrimRadio.tabIndex = -1;
-    scrimRadio.setAttribute('aria-hidden', "true");
+    scrimRadio.setAttribute("aria-hidden", "true");
     scrimRadio.value = "off";
 
     const hideChannelList = () => {
-      if (!!channelList.attributes['aria-hidden']) {
-        channelList.removeAttribute('aria-hidden');
+      if (!!channelList.attributes["aria-hidden"]) {
+        channelList.removeAttribute("aria-hidden");
       }
       // Removes from tabIndex
       channelListBody.style.display = "none";
@@ -50,13 +51,11 @@
     const scrimEl = document.createElement("label");
     scrimEl.id = `corbinPluginscrimEl`;
     scrimEl.type = `button`;
-    scrimEl.addEventListener('click', event => {
+    scrimEl.addEventListener("click", event => {
       event.preventDefault();
       event.stopPropagation();
       hideChannelList();
     });
-
-
 
     channelList.parentElement.insertBefore(drawerRadio, channelList);
     channelList.parentElement.insertBefore(drawerButton, channelList);
@@ -103,8 +102,34 @@
         scrimRadio.click();
       }
     });
-  };
 
+    document.addEventListener("keydown", ({code}) => {
+      if (code && code === "Escape" && drawerRadio.checked) {
+        hideChannelList();
+      }
+    });
+
+    const conditionallyAddEffects = () => {
+      const scrollListener = (e) => {
+        e.preventDefault();
+        channelHeader.scrollLeft += e.deltaY;
+      };
+
+      // Considered a large screen
+      if (window.innerWidth > 700) {
+        channelHeader.removeEventListener('wheel', scrollListener);
+      } else {
+        channelHeader.addEventListener('wheel', scrollListener);
+      }
+    };
+
+    document.addEventListener('resize', () => {
+      conditionallyAddEffects();
+    });
+
+    conditionallyAddEffects();
+  };
+  
   // Make sure elements are on screen
   function checkDocumentLoaded(cb) {
     if (document.querySelector(".client_channels_list_container")) {
