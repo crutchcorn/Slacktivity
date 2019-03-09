@@ -9,8 +9,7 @@
   },
   "description": "Making improvements and adding features to the web Slack experience.",
   "permissions": [
-    "tabs",
-    "<all_urls>"
+    "*://*.slack.com/messages/*"
   ],
   "content_scripts": [
     {
