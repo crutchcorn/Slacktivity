@@ -1,0 +1,29 @@
+{
+  "name": "Maximum Slackivity",
+  "version": "0.1.0",
+  "icons": {
+    "16": "/images/get_started16.png",
+    "48": "/images/get_started48.png",
+    "128": "/images/get_started128.png"
+  },
+  "description": "Content scripts that make websites more Material Design.",
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.slack.com/messages/*"
+      ],
+      "css": [
+        "/slack-overwrites.css"
+      ],
+      "js": [
+        "/working-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "manifest_version": 2
+}
