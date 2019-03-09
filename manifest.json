@@ -2,11 +2,11 @@
   "name": "Maximum Slackivity",
   "version": "0.1.0",
   "icons": {
-    "16": "/images/get_started16.png",
-    "48": "/images/get_started48.png",
-    "128": "/images/get_started128.png"
+    "16": "/icon/get_started16.png",
+    "48": "/icon/get_started48.png",
+    "128": "/icon/get_started128.png"
   },
-  "description": "Content scripts that make websites more Material Design.",
+  "description": "Making improvements and adding features to the web Slack experience.",
   "permissions": [
     "tabs",
     "<all_urls>"

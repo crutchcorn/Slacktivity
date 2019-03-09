@@ -1,42 +1,66 @@
 :root {
     --drawerLabelSize: 50px;
 }
+
 @media (min-width: 700px) {
-    #corbinPlugindrawerLabel {
+    #corbinPlugindrawerButton {
         display: none !important;
         margin-left: 250px;
     }
 }
-#corbinPlugindrawerLabel {
-    --drawerActualLabelSize: 28px;
-    height: var(--drawerActualLabelSize);
-    width: var(--drawerActualLabelSize);
+
+#corbinPlugindrawerButton {
+    --drawerBtnMargin: 5px;
+    --actualLabelSize: calc(var(--drawerLabelSize) - (var(--drawerBtnMargin) * 2));
+    height: var(--actualLabelSize);
+    width: var(--actualLabelSize);
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     background-repeat: no-repeat;
     background-size: contain;
+    background-color: white;
+    border: none;
+    background-origin: content-box;
+    border-radius: 5px;
+    padding: 8px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgAQMAAADYVuV7AAAABlBMVEUAAAAzMzPI8eYgAAAAAXRSTlMAQObYZgAAABxJREFUeAFjIBOMAv7/UPCBlhzywWgYjIbBKAAANijXKaI5RRgAAAAASUVORK5CYII=);
-    margin: calc((var(--drawerLabelSize) - var(--drawerActualLabelSize)) / 2);
-    margin-top: calc((var(--drawerLabelSize) - var(--drawerActualLabelSize)) / 2 + 7px);
+    margin: calc(var(--drawerBtnMargin) + 5px) var(--drawerBtnMargin);
     z-index: 1;
     transition: left 100ms ease-in-out;
+}
+
+#corbinPlugindrawerButton:hover {
+    background-color: #e6e6e6;
+}
+
+#corbinPlugindrawerButton:focus {
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+#corbinPlugindrawerButton:active {
+    top: 1px;
 }
 
 input.corbinPluginradioEl[type="radio"] {
     display: none;
 }
-input.corbinPluginradioEl[type="radio"] ~ #corbinPluginscrimLabel {
+
+input.corbinPluginradioEl[type="radio"] ~ #corbinPluginscrimEl {
     background: black;
+    border: none;
     opacity: 0.0;
 }
+
 input.corbinPluginradioEl[type="radio"] ~ .client_channels_list_container {
     transition: margin-left 100ms ease-in-out;
 }
+
 input.corbinPluginradioEl[type="radio"][value="on"]:checked ~ .client_channels_list_container {
     margin-left: 0px !important;
 }
+
 @media (max-width: 700px) {
 
     .c-search_modal .popover > div {
@@ -77,15 +101,15 @@ input.corbinPluginradioEl[type="radio"][value="on"]:checked ~ .client_channels_l
     }
 
     #search_container {
-        min-width: 110px;
+        min-width: 110px !important;
     }
 
-    input.corbinPluginradioEl[type="radio"][value="on"]:checked ~ #corbinPluginscrimLabel {
+    input.corbinPluginradioEl[type="radio"][value="on"]:checked ~ #corbinPluginscrimEl {
         opacity: 0.5 !important;
         z-index: 250 !important;
     }
 
-    #corbinPlugindrawer:checked ~ #corbinPlugindrawerLabel {
+    #corbinPlugindrawer:checked ~ #corbinPlugindrawerButton {
         left: 220px;
     }
 
@@ -93,7 +117,8 @@ input.corbinPluginradioEl[type="radio"][value="on"]:checked ~ .client_channels_l
         margin-left: -220px;
         z-index: 251;
     }
-    input.corbinPluginradioEl[type="radio"] ~ #corbinPluginscrimLabel {
+
+    input.corbinPluginradioEl[type="radio"] ~ #corbinPluginscrimEl {
         height: 100vh;
         width: 100vw;
         position: fixed;
