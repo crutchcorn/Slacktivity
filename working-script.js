@@ -1,33 +1,26 @@
-const pluginPrefix = "corbinPlugin";
-const channelListSelector = ".client_channels_list_container";
-const channelList = document.querySelector(channelListSelector);
-const sizeSmall = "700px";
-// NOTE: Is direct sibling following channelList selector
-const mainContentSelector = ".client_main_container";
-// NOTE: Is the first child of mainContentSelector
-const headerSelector = "#client_header";
+const channelList = document.querySelector(".client_channels_list_container");
 
 const drawerRadio = document.createElement("input");
 drawerRadio.type = "radio";
-drawerRadio.classList.add(`${pluginPrefix}radioEl`);
-drawerRadio.id = `${pluginPrefix}drawer`;
-drawerRadio.name = `${pluginPrefix}sidenav`;
+drawerRadio.classList.add(`corbinPluginradioEl`);
+drawerRadio.id = `corbinPlugindrawer`;
+drawerRadio.name = `corbinPluginsidenav`;
 drawerRadio.value = "on";
 
 const drawerLabel = document.createElement("label");
-drawerLabel.id = `${pluginPrefix}drawerLabel`;
-drawerLabel.htmlFor = `${pluginPrefix}drawer`;
+drawerLabel.id = `corbinPlugindrawerLabel`;
+drawerLabel.htmlFor = `corbinPlugindrawer`;
 
 const scrimRadio = document.createElement("input");
 scrimRadio.type = "radio";
-scrimRadio.classList.add(`${pluginPrefix}radioEl`);
-scrimRadio.id = `${pluginPrefix}scrim`;
-scrimRadio.name = `${pluginPrefix}sidenav`;
+scrimRadio.classList.add(`corbinPluginradioEl`);
+scrimRadio.id = `corbinPluginscrim`;
+scrimRadio.name = `corbinPluginsidenav`;
 scrimRadio.value = "off";
 
 const scrimLabel = document.createElement("label");
-scrimLabel.id = `${pluginPrefix}scrimLabel`;
-scrimLabel.htmlFor = `${pluginPrefix}scrim`;
+scrimLabel.id = `corbinPluginscrimLabel`;
+scrimLabel.htmlFor = `corbinPluginscrim`;
 
 
 channelList.parentElement.insertBefore(drawerRadio, channelList);
@@ -35,18 +28,20 @@ channelList.parentElement.insertBefore(drawerLabel, channelList);
 channelList.parentElement.insertBefore(scrimRadio, channelList);
 channelList.parentElement.insertBefore(scrimLabel, channelList);
 
-const drawerLabelSize = "50px";
-const drawerActualLabelSize = "28px";
 const css = `
-@media (min-width: ${sizeSmall}) {
-  #${drawerLabel.id} {
+:root {
+  --drawerLabelSize: 50px;
+}
+@media (min-width: 700px) {
+  #corbinPlugindrawerLabel {
     display: none !important;
     margin-left: 250px;
   }
 }
-#${drawerLabel.id} {
-  height: ${drawerActualLabelSize};
-  width: ${drawerActualLabelSize};
+#corbinPlugindrawerLabel {
+  --drawerActualLabelSize: 28px;
+  height: var(--drawerActualLabelSize);
+  width: var(--drawerActualLabelSize);
   display: block;
   position: absolute;
   top: 0;
@@ -54,60 +49,60 @@ const css = `
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgAQMAAADYVuV7AAAABlBMVEUAAAAzMzPI8eYgAAAAAXRSTlMAQObYZgAAABxJREFUeAFjIBOMAv7/UPCBlhzywWgYjIbBKAAANijXKaI5RRgAAAAASUVORK5CYII=);
-  margin: calc((${drawerLabelSize} - ${drawerActualLabelSize}) / 2);
-  margin-top: calc((${drawerLabelSize} - ${drawerActualLabelSize}) / 2 + 7px);
+  margin: calc((var(--drawerLabelSize) - var(--drawerActualLabelSize)) / 2);
+  margin-top: calc((var(--drawerLabelSize) - var(--drawerActualLabelSize)) / 2 + 7px);
   z-index: 1;
   transition: left 100ms ease-in-out;
 }
 
-input.${pluginPrefix}radioEl[type="radio"] {
+input.corbinPluginradioEl[type="radio"] {
   display: none;
 }
-input.${pluginPrefix}radioEl[type="radio"] ~ #${scrimLabel.id} {
+input.corbinPluginradioEl[type="radio"] ~ #corbinPluginscrimLabel {
   background: black;
   opacity: 0.0;
 }
-input.${pluginPrefix}radioEl[type="radio"] ~ ${channelListSelector} {
+input.corbinPluginradioEl[type="radio"] ~ .client_channels_list_container {
   transition: margin-left 100ms ease-in-out;
 }
-input.${pluginPrefix}radioEl[type="radio"][value="on"]:checked ~ ${channelListSelector} {
+input.corbinPluginradioEl[type="radio"][value="on"]:checked ~ .client_channels_list_container {
   margin-left: 0px !important;
 }
-@media (max-width: ${sizeSmall}) {
+@media (max-width: 700px) {
 
   .c-search_modal .popover > div {
     max-width: calc(100vw - 24px);
   }
 
-  ${headerSelector} {
-    margin-left: ${drawerLabelSize};
+  #client_header {
+    margin-left: var(--drawerLabelSize);
   }
 
-  ${mainContentSelector} {
+  .client_main_container {
     max-width: 100vw;
   }
 
-  ${headerSelector} > .channel_header {
+  #client_header > .channel_header {
     flex-wrap: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
   }
 
-  ${headerSelector} > .channel_header > .messages_header {
-    flex-basis: calc(100vw - ${drawerLabelSize});
+  #client_header > .channel_header > .messages_header {
+    flex-basis: calc(100vw - var(--drawerLabelSize));
     flex-shrink: 0;
   }
 
-  ${headerSelector} > .channel_header::-webkit-scrollbar {
+  #client_header > .channel_header::-webkit-scrollbar {
     height: 6px;
   }
 
-  ${headerSelector} > .channel_header::-webkit-scrollbar-thumb {
+  #client_header > .channel_header::-webkit-scrollbar-thumb {
     background: #666;
     border-radius: 20px;
   }
 
-  ${headerSelector} > .channel_header::-webkit-scrollbar-thumb {
+  #client_header > .channel_header::-webkit-scrollbar-thumb {
     background: #ddd;
     border-radius: 20px;
   }
@@ -116,20 +111,20 @@ input.${pluginPrefix}radioEl[type="radio"][value="on"]:checked ~ ${channelListSe
       min-width: 110px;
   }
 
-  input.${pluginPrefix}radioEl[type="radio"][value="on"]:checked ~ #${scrimLabel.id} {
+  input.corbinPluginradioEl[type="radio"][value="on"]:checked ~ #corbinPluginscrimLabel {
     opacity: 0.5 !important;
     z-index: 250 !important;
   }
 
-  #${drawerRadio.id}:checked ~ #${drawerLabel.id} {
+  #corbinPlugindrawer:checked ~ #corbinPlugindrawerLabel {
     left: 220px;
   }
 
-  input.${pluginPrefix}radioEl[type="radio"] ~ ${channelListSelector} {
+  input.corbinPluginradioEl[type="radio"] ~ .client_channels_list_container {
     margin-left: -220px;
     z-index: 251;
   }
-  input.${pluginPrefix}radioEl[type="radio"] ~ #${scrimLabel.id} {
+  input.corbinPluginradioEl[type="radio"] ~ #corbinPluginscrimLabel {
     height: 100vh;
     width: 100vw;
     position: fixed;
