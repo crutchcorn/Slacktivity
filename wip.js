@@ -102,6 +102,20 @@ let observer = new MutationObserver(mutationsList => {
   }
 });
 
+// Use internal React stuff LOL I LOVE THIS
+// https://stackoverflow.com/a/39165137/4148154
+/**
+ window.FindReact = function(dom) {
+    let key = Object.keys(dom).find(key=>key.startsWith("__reactInternalInstance$"));
+    let internalInstance = dom[key];
+    if (internalInstance == null) return null;
+
+    return internalInstance._debugOwner
+        ? internalInstance._debugOwner.stateNode
+        : internalInstance.return.stateNode;
+}
+ */
+
 let sidbarEl = document.getElementsByClassName("p-channel_sidebar__static_list")[0];
 
 observer.observe(sidbarEl, {
